@@ -1,1 +1,2 @@
-email-id,sender-id,list-of-reveiver-id,date,time,keywords,reply
+email-id,sender-id,list-of-reveiver-id,date_time,keywords,reply
+160010017@iitdh.ac.in,160010007@iitdh.ac.in,160010017@iitdh.ac.in,14-11-1019 12:15:20,git java github,nill
