@@ -31,4 +31,5 @@ The group should contain persons who have sent at least 5 emails on the topic an
 - Programming Language: JAVA
 - Tools: MAVEN
 - Domain: Software Engineering
+- License: MIT
 - Author: Ashish Kumar Bhoi
