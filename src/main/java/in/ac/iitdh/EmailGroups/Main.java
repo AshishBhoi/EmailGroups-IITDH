@@ -7,6 +7,19 @@ import java.util.List;
 
 /**
  * Email Groups.
+ *
+ * <p>
+ * Groups of people who have strongly communicated
+ * among themselves on a given keyword.
+ * Such that the group should contain
+ * persons who have sent at least
+ * 5 emails on the topic and also replied to
+ * 5 emails that she received on that topic
+ * in the last one month.
+ * </p>
+ *
+ * @author Ashish Kumar Bhoi
+ * @version 1.0.0
  */
 final class Main {
 
