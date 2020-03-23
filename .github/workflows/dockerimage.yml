@@ -1,0 +1,25 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag email-transactions
+    - name: Creating .tar of docker image
+      run: docker save email-transactions > email-transactions.tar
+    - name: Download .tar of docker image
+      uses: actions/download-artifact@v1.0.0
+      with:
+        name: Image
+        path: email-transactions.tar
