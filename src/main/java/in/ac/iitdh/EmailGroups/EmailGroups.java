@@ -77,12 +77,33 @@ public class EmailGroups {
   }
 
   /**
+   * Print all persons and their details.
+   */
+  public void printPersons() {
+    for (String[] person : persons) {
+      System.out.printf("%-30s %10s %30s \n",
+              person[0],
+              person[1],
+              person[2]);
+    }
+  }
+
+  /**
    * Public function to get all keywords.
    *
    * @return List of keywords.
    */
   public List<String> getKeywords() {
     return keywords;
+  }
+
+  /**
+   * Print all keywords.
+   */
+  public void printKeywords() {
+    for (String keyword : keywords) {
+      System.out.printf("%s \n", keyword);
+    }
   }
 
   /**
@@ -101,5 +122,17 @@ public class EmailGroups {
    */
   public List<String[]> getEmailTransactions() {
     return emailTransactions;
+  }
+
+  /**
+   * Print Email transactions.
+   */
+  public void printEmailTransactions() {
+    for (String[] emailTransaction : emailTransactions) {
+      System.out.printf("%-30s %10s %30s \n",
+              emailTransaction[0],
+              emailTransaction[1],
+              emailTransaction[2]);
+    }
   }
 }
