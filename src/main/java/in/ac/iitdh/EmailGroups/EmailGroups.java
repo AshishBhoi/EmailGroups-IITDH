@@ -43,9 +43,11 @@ public class EmailGroups {
   private List<String[]> emailTransactions() {
     List<String[]> strings = new ArrayList<>();
     final int number = 3;
-    LocalDate date = LocalDate.now().minusDays(30);
+    final int day = 30;
+    LocalDate date = LocalDate.now().minusDays(day);
     for (EmailInventory email : emails) {
-      if (!email.getDate().before(Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant()))) {
+      if (!email.getDate().before(Date.
+              from(date.atStartOfDay(ZoneId.systemDefault()).toInstant()))) {
         for (int j = 0; j < email.getReceiverID().length; j++) {
           String[] string = new String[number];
           string[0] = email.getSenderID();
