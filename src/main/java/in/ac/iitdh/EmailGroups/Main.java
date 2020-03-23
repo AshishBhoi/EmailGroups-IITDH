@@ -2,7 +2,6 @@ package in.ac.iitdh.EmailGroups;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -39,13 +38,13 @@ final class Main {
             "/home/ashish/Courses/cs305/EmailGroups/Emails.csv",
             "/home/ashish/Courses/cs305/EmailGroups/Keywords.csv",
             "/home/ashish/Courses/cs305/EmailGroups/Persons.csv");
-    List<EmailInventory> persons = emailGroups.getEmails();
+    List<String[]> persons = emailGroups.getEmailTransactions();
 
-    for (EmailInventory strings : persons) {
+    for (String[] strings : persons) {
       System.out.printf("%-30s %10s %30s \n",
-              strings.getEmailID(),
-              Arrays.toString(strings.getReceiverID()),
-              strings.getDate());
+              strings[0],
+              strings[1],
+              strings[2]);
     }
   }
 }
