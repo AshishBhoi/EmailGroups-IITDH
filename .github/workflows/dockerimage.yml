@@ -19,7 +19,7 @@ jobs:
     - name: Creating .tar of docker image
       run: docker save email-transactions > email-transactions.tar
     - name: Download .tar of docker image
-      uses: actions/download-artifact@v1.0.0
+      uses: actions/upload-artifact@v1
       with:
         name: Image
         path: email-transactions.tar
