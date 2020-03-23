@@ -2,8 +2,11 @@ package in.ac.iitdh.EmailGroups;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class EmailGroups {
@@ -40,20 +43,23 @@ public class EmailGroups {
   private List<String[]> emailTransactions() {
     List<String[]> strings = new ArrayList<>();
     final int number = 3;
+    LocalDate date = LocalDate.now().minusDays(30);
     for (EmailInventory email : emails) {
-      for (int j = 0; j < email.getReceiverID().length; j++) {
-        String[] string = new String[number];
-        string[0] = email.getSenderID();
-        string[1] = email.getReceiverID()[j];
-        string[2] = Arrays.toString(email.getKeywords());
-        strings.add(string);
-      }
-      if (!email.getReply().equals("null")) {
-        String[] string = new String[number];
-        string[0] = email.getReply();
-        string[1] = email.getEmailID();
-        string[2] = Arrays.toString(email.getKeywords());
-        strings.add(string);
+      if (!email.getDate().before(Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant()))) {
+        for (int j = 0; j < email.getReceiverID().length; j++) {
+          String[] string = new String[number];
+          string[0] = email.getSenderID();
+          string[1] = email.getReceiverID()[j];
+          string[2] = Arrays.toString(email.getKeywords());
+          strings.add(string);
+        }
+        if (!email.getReply().equals("null")) {
+          String[] string = new String[number];
+          string[0] = email.getReply();
+          string[1] = email.getEmailID();
+          string[2] = Arrays.toString(email.getKeywords());
+          strings.add(string);
+        }
       }
     }
     return strings;
