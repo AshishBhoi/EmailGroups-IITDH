@@ -37,7 +37,7 @@ public class EmailGroups {
     this.persons = readCSV.readPersons(person);
     this.keywords = readCSV.readKeyWords(keyword);
     this.emails = readCSV.readEmails(email);
-    this.emailTransactions =  emailTransactions();
+    this.emailTransactions = emailTransactions();
   }
 
   private List<String[]> emailTransactions() {

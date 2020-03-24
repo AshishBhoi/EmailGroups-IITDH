@@ -13,15 +13,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag email-transactions
-    - name: Run the Docker image
-      run: docker run email-transactions
-    - name: Creating .tar of docker image
-      run: docker save email-transactions > email-transactions.tar
-    - name: Download .tar of docker image
-      uses: actions/upload-artifact@v1
-      with:
-        name: Image
-        path: email-transactions.tar
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag email-transactions
+      - name: Run the Docker image
+        run: docker run email-transactions
+      - name: Creating .tar of docker image
+        run: docker save email-transactions > email-transactions.tar
+      - name: Download .tar of docker image
+        uses: actions/upload-artifact@v1
+        with:
+          name: Image
+          path: email-transactions.tar
