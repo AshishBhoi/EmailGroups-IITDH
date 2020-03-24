@@ -1,5 +1,7 @@
 # Email Grouping #
 
+![Docker Image CI](https://github.com/AshishBhoi/EmailGroups-IITDH/workflows/Docker%20Image%20CI/badge.svg)
+
 ## Given files ##
 
 ### Persons.csv ###
