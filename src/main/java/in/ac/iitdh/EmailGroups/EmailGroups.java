@@ -29,7 +29,12 @@ public class EmailGroups {
   /**
    * List of all email transactions.
    */
-  private List<String[]> emailTransactions;
+  private List<TransactionInventory> emailTransactions;
+
+  /**
+   * List of email groups.
+   */
+  private List<List<String>> emailGroups;
 
   EmailGroups(final String email, final String keyword, final String person)
           throws IOException, ParseException {
@@ -38,29 +43,44 @@ public class EmailGroups {
     this.keywords = readCSV.readKeyWords(keyword);
     this.emails = readCSV.readEmails(email);
     this.emailTransactions = emailTransactions();
+    this.emailGroups = emailGroups();
   }
 
-  private List<String[]> emailTransactions() {
-    List<String[]> strings = new ArrayList<>();
-    final int number = 3;
+  private List<List<String>> emailGroups() {
+    List<List<String>> list = new ArrayList<>(keywords.size());
+    for (String keyword : keywords) {
+      List<String> string = new ArrayList<>();
+      for (TransactionInventory emailTransaction : emailTransactions) {
+        for (int i = 0; i < emailTransaction.getKeywords().length; i++) {
+          if (keyword.equals(emailTransaction.getKeywords()[i])) {
+            string.add(emailTransaction.getSenderID());
+            string.add(emailTransaction.getReceiverID());
+          }
+        }
+      }
+      list.add(string);
+    }
+    return list;
+  }
+
+  private List<TransactionInventory> emailTransactions() {
+    List<TransactionInventory> strings = new ArrayList<>();
     final int day = 30;
     LocalDate date = LocalDate.now().minusDays(day);
     for (EmailInventory email : emails) {
       if (!email.getDate().before(Date.
               from(date.atStartOfDay(ZoneId.systemDefault()).toInstant()))) {
         for (int j = 0; j < email.getReceiverID().length; j++) {
-          String[] string = new String[number];
-          string[0] = email.getSenderID();
-          string[1] = email.getReceiverID()[j];
-          string[2] = Arrays.toString(email.getKeywords());
-          strings.add(string);
+          String senderID = email.getSenderID();
+          String receiverID = email.getReceiverID()[j];
+          String[] keyword = email.getKeywords();
+          strings.add(new TransactionInventory(senderID, receiverID, keyword));
         }
         if (!email.getReply().equals("null")) {
-          String[] string = new String[number];
-          string[0] = email.getReply();
-          string[1] = email.getEmailID();
-          string[2] = Arrays.toString(email.getKeywords());
-          strings.add(string);
+          String senderID = email.getReply();
+          String receiverID = email.getEmailID();
+          String[] keyword = email.getKeywords();
+          strings.add(new TransactionInventory(senderID, receiverID, keyword));
         }
       }
     }
@@ -120,7 +140,7 @@ public class EmailGroups {
    *
    * @return List of email groups.
    */
-  public List<String[]> getEmailTransactions() {
+  public List<TransactionInventory> getEmailTransactions() {
     return emailTransactions;
   }
 
@@ -128,11 +148,29 @@ public class EmailGroups {
    * Print Email transactions.
    */
   public void printEmailTransactions() {
-    for (String[] emailTransaction : emailTransactions) {
+    for (TransactionInventory emailTransaction : emailTransactions) {
       System.out.printf("%-30s %10s %30s \n",
-              emailTransaction[0],
-              emailTransaction[1],
-              emailTransaction[2]);
+              emailTransaction.getReceiverID(),
+              emailTransaction.getSenderID(),
+              Arrays.toString(emailTransaction.getKeywords()));
+    }
+  }
+
+  /**
+   * Public function to get email groups.
+   *
+   * @return Array list of email groups.
+   */
+  public List<List<String>> getEmailGroups() {
+    return emailGroups;
+  }
+
+  /**
+   * Function to print email groups.
+   */
+  public void printEmailGroups() {
+    for (List<String> emailGroup : emailGroups) {
+      System.out.println(emailGroup.toString());
     }
   }
 }

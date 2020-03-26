@@ -38,6 +38,8 @@ final class Main {
             args[1],
             args[2]);
 
-    emailGroups.printEmailTransactions();
+//    emailGroups.printEmailTransactions();
+
+    emailGroups.printEmailGroups();
   }
 }
