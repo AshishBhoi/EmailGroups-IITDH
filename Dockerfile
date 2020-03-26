@@ -6,7 +6,7 @@ RUN mvn -f /home/app/pom.xml clean package
 FROM anapsix/alpine-java
 MAINTAINER Ashish Kumar Bhoi
 COPY --from=build /home/app/target/EmailGroup-1.0-SNAPSHOT.jar /EmailGroup.jar
-COPY test/Emails.csv /Emails.csv
-COPY test/Keywords.csv /Keywords.csv
-COPY test/Persons.csv /Persons.csv
+COPY Emails.csv /Emails.csv
+COPY Keywords.csv /Keywords.csv
+COPY Persons.csv /Persons.csv
 CMD ["java", "-jar", "/EmailGroup.jar", "/Emails.csv", "/Keywords.csv", "/Persons.csv"]

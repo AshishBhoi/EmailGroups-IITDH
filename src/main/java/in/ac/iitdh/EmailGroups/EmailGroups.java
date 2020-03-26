@@ -170,7 +170,9 @@ public class EmailGroups {
    */
   public void printEmailGroups() {
     for (List<String> emailGroup : emailGroups) {
-      System.out.println(emailGroup.toString());
+      if (emailGroup.size() != 0) {
+        System.out.println(emailGroup.toString());
+      }
     }
   }
 }
