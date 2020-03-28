@@ -32,6 +32,12 @@ https://github.com/AshishBhoi/EmailGroups-IITDH
 - List of keywords
 - If it is a reply previous Email ID else "null"
 
+## Input ##
+
+- Email.csv (Contains all the email exchanged)
+- Keywords.csv (Contains all the keywords)
+- Persons.csv (Contains details about the person)
+
 ## Output ##
 
 Groups of people who have strongly communicated among themselves on a given keyword.
