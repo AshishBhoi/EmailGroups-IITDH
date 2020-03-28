@@ -47,7 +47,7 @@ The group should contain persons who have sent at least 5 emails on the topic an
 
 - 'Dockerfile' added to create image.
 
-    $ docker build . --file Dockerfile --tag email-transactions
+    $ docker build . --file Dockerfile --tag email-groups
 - Run that image.
 
     $ docker run email-groups
