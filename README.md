@@ -2,8 +2,8 @@
 
 <div align="center">
 
-[GitHub](https://img.shields.io/github/license/AshishBhoi/EmailGroups-IITDH)
-[Docker Image CI](https://github.com/AshishBhoi/EmailGroups-IITDH/workflows/Docker%20Image%20CI/badge.svg)
+![GitHub](https://img.shields.io/github/license/AshishBhoi/EmailGroups-IITDH)
+![Docker Image CI](https://github.com/AshishBhoi/EmailGroups-IITDH/workflows/Docker%20Image%20CI/badge.svg)
 
 </div>
 
