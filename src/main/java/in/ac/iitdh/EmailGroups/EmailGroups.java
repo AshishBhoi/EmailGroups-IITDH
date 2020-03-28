@@ -34,7 +34,7 @@ public class EmailGroups {
   /**
    * List of email groups.
    */
-  private List<List<String>> emailGroups;
+  private List<List<String[]>> emailGroups;
 
   EmailGroups(final String email, final String keyword, final String person)
           throws IOException, ParseException {
@@ -43,18 +43,62 @@ public class EmailGroups {
     this.keywords = readCSV.readKeyWords(keyword);
     this.emails = readCSV.readEmails(email);
     this.emailTransactions = emailTransactions();
-    this.emailGroups = emailGroups();
+    this.emailGroups = mergeOne();
   }
 
-  private List<List<String>> emailGroups() {
-    List<List<String>> list = new ArrayList<>(keywords.size());
+  private List<List<String[]>> mergeOne() {
+    List<List<String[]>> list = emailGroups();
+    List<List<String[]>> newList = new ArrayList<>();
+    for (List<String[]> strings : list) {
+      List<String[]> newLists = new ArrayList<>();
+      List<String[]> newLists2 = new ArrayList<>();
+      if (strings.size() != 0) {
+        for (String[] string : strings) {
+          boolean check = false;
+          if (newLists.size() == 0) {
+            String[] addNew = {string[0], string[1], "1"};
+            newLists.add(addNew);
+            newLists2.add(addNew);
+          }
+          int i = 0;
+          for (String[] newLists1 : newLists) {
+            if (newLists1[0].equals(string[0])
+                    && newLists1[1].equals(string[1])) {
+              int count = Integer.parseInt(newLists2.get(i)[2]) + 1;
+              String[] str = {string[0], string[1], String.valueOf(count)};
+              newLists2.set(i, str);
+              check = true;
+            } else if (newLists1[0].equals(string[1])
+                    && newLists1[1].equals(string[0])) {
+              int count = Integer.parseInt(newLists2.get(i)[2]) + 1;
+              String[] str = {string[0], string[1], String.valueOf(count)};
+              newLists2.set(i, str);
+              check = true;
+            }
+            i++;
+          }
+          if (!check) {
+            String[] addNew = {string[0], string[1], "1"};
+            newLists.add(addNew);
+            newLists2.add(addNew);
+          }
+        }
+      }
+      newList.add(newLists2);
+    }
+    return newList;
+  }
+
+  private List<List<String[]>> emailGroups() {
+    List<List<String[]>> list = new ArrayList<>(keywords.size());
     for (String keyword : keywords) {
-      List<String> string = new ArrayList<>();
+      List<String[]> string = new ArrayList<>();
       for (TransactionInventory emailTransaction : emailTransactions) {
         for (int i = 0; i < emailTransaction.getKeywords().length; i++) {
           if (keyword.equals(emailTransaction.getKeywords()[i])) {
-            string.add(emailTransaction.getSenderID());
-            string.add(emailTransaction.getReceiverID());
+            String[] str = {emailTransaction.getSenderID(),
+                    emailTransaction.getReceiverID()};
+            string.add(str);
           }
         }
       }
@@ -161,7 +205,7 @@ public class EmailGroups {
    *
    * @return Array list of email groups.
    */
-  public List<List<String>> getEmailGroups() {
+  public List<List<String[]>> getEmailGroups() {
     return emailGroups;
   }
 
@@ -169,9 +213,13 @@ public class EmailGroups {
    * Function to print email groups.
    */
   public void printEmailGroups() {
-    for (List<String> emailGroup : emailGroups) {
+    for (List<String[]> emailGroup : emailGroups) {
       if (emailGroup.size() != 0) {
-        System.out.println(emailGroup.toString());
+        for (String[] emailGroup1 : emailGroup) {
+          System.out.print(Arrays.toString(emailGroup1) + "\t");
+        }
+        System.out.println();
+        System.out.println();
       }
     }
   }
