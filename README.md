@@ -7,9 +7,13 @@
 
 </div>
 
-## Github Link ##
+## Links ##
 
-https://github.com/AshishBhoi/EmailGroups-IITDH
+- [GitHub Links](https://github.com/AshishBhoi/EmailGroups-IITDH)
+- [GitHub CI (GitHub Actions)](https://github.com/AshishBhoi/EmailGroups-IITDH/actions?query=workflow%3A%22Docker+Image+CI%22)
+- [Docker Tar File](https://github.com/AshishBhoi/EmailGroups-IITDH/releases/download/v1.0.0/email-groups.tar)
+- [JAVA JAR file](https://github.com/AshishBhoi/EmailGroups-IITDH/releases/download/v1.0.0/EmailGroup-1.0-SNAPSHOT.jar)
+- [Report](http://gitlab.iitdh.ac.in/160010017/email-groups/uploads/6641f92874fb23b3e4be54494f13d218/EmailGroups.pdf)
 
 ## Given files ##
 
@@ -47,13 +51,21 @@ The group should contain persons who have sent at least 5 emails on the topic an
 
 - 'Dockerfile' added to create image.
 
-    $ docker build . --file Dockerfile --tag email-groups
+        $ docker build . --file Dockerfile --tag email-groups
 - Run that image.
 
-    $ docker run email-groups
+        $ docker run email-groups
 - Creating .tar of docker image
 
-    $ docker save email-groups > email-groups.tar
+        $ docker save email-groups > email-groups.tar
+    
+- Load docker tar file
+
+        $ docker load > email-groups.tar
+    
+- Run docker image
+
+        $ docker run email-groups:v1.0.0
 
 ## Additional Details ##
 
