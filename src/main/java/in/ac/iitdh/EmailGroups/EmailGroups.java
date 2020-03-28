@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EmailGroups {
 
@@ -34,7 +35,7 @@ public class EmailGroups {
   /**
    * List of email groups.
    */
-  private List<List<String[]>> emailGroups;
+  private List<List<String>> emailGroups;
 
   EmailGroups(final String email, final String keyword, final String person)
           throws IOException, ParseException {
@@ -43,7 +44,25 @@ public class EmailGroups {
     this.keywords = readCSV.readKeyWords(keyword);
     this.emails = readCSV.readEmails(email);
     this.emailTransactions = emailTransactions();
-    this.emailGroups = mergeOne();
+    this.emailGroups = groupEmails();
+  }
+
+  private List<List<String>> groupEmails() {
+    List<List<String[]>> list = mergeOne();
+    List<List<String>> emailGroups1 = new ArrayList<>();
+    for (List<String[]> strings1 : list) {
+      List<String> emailGroup = new ArrayList<>();
+      for (String[] strings2 : strings1) {
+        final int check  = 5;
+        if (Integer.parseInt(strings2[2]) >= check) {
+          emailGroup.add(strings2[0]);
+          emailGroup.add(strings2[1]);
+        }
+      }
+      emailGroups1.add(emailGroup.stream().distinct()
+              .collect(Collectors.toList()));
+    }
+    return  emailGroups1.stream().distinct().collect(Collectors.toList());
   }
 
   private List<List<String[]>> mergeOne() {
@@ -205,7 +224,7 @@ public class EmailGroups {
    *
    * @return Array list of email groups.
    */
-  public List<List<String[]>> getEmailGroups() {
+  public List<List<String>> getEmailGroups() {
     return emailGroups;
   }
 
@@ -213,12 +232,13 @@ public class EmailGroups {
    * Function to print email groups.
    */
   public void printEmailGroups() {
-    for (List<String[]> emailGroup : emailGroups) {
+    for (List<String> emailGroup : emailGroups) {
       if (emailGroup.size() != 0) {
-        for (String[] emailGroup1 : emailGroup) {
-          System.out.print(Arrays.toString(emailGroup1) + "\t");
+        System.out.print("[\t");
+        for (String emailGroup1 : emailGroup) {
+          System.out.print(emailGroup1 + "\t");
         }
-        System.out.println();
+        System.out.print("]");
         System.out.println();
       }
     }
