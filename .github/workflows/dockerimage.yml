@@ -15,13 +15,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag email-transactions
+        run: docker build . --file Dockerfile --tag email-groups
       - name: Run the Docker image
-        run: docker run email-transactions
+        run: docker run email-groups
       - name: Creating .tar of docker image
-        run: docker save email-transactions > email-transactions.tar
+        run: docker save email-groups > email-groups.tar
       - name: Download .tar of docker image
         uses: actions/upload-artifact@v1
         with:
           name: Image
-          path: email-transactions.tar
+          path: email-groups.tar
