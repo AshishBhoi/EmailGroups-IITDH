@@ -1,10 +1,8 @@
 # Email Grouping #
 
 <div align="center">
-
-[![GitHub](https://img.shields.io/github/license/AshishBhoi/EmailGroups-IITDH)](https://github.com/AshishBhoi/EmailGroups-IITDH/blob/master/LICENSE)
-[![Docker Image CI](https://github.com/AshishBhoi/EmailGroups-IITDH/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/AshishBhoi/EmailGroups-IITDH/actions?query=workflow%3A%22Docker+Image+CI%22)
-
+<a href="https://github.com/AshishBhoi/EmailGroups-IITDH/blob/master/LICENSE"><img src="https://img.shields.io/github/license/AshishBhoi/EmailGroups-IITDH" alt="GitHub" />  </a>
+<a href="https://github.com/AshishBhoi/EmailGroups-IITDH/actions?query=workflow%3A%22Docker+Image+CI%22"><img src="https://github.com/AshishBhoi/EmailGroups-IITDH/workflows/Docker%20Image%20CI/badge.svg" alt="Docker Image CI" /></a>
 </div>
 
 ## Links ##
