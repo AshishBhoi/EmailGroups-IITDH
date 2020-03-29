@@ -3,7 +3,7 @@ COPY src /home/app/src
 COPY pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean package
 
-FROM anapsix/alpine-java
+FROM openjdk:8-alpine
 MAINTAINER Ashish Kumar Bhoi
 COPY --from=build /home/app/target/EmailGroup-1.0-SNAPSHOT.jar /EmailGroup.jar
 COPY Emails.csv /Emails.csv
