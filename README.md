@@ -72,4 +72,5 @@ The group should contain persons who have sent at least 5 emails on the topic an
 - Tools: MAVEN, DOCKER
 - Domain: Software Engineering
 - License: MIT
+- Version Control: GIT
 - Author: Ashish Kumar Bhoi
